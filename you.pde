@@ -4,8 +4,8 @@ GStick joystick;
 int facing = 6;
 int dirX, dirY;
 float px, py;
-float dx=6;
-float dy=6;
+float dx=0;
+float dy=0;
 float speed;
 
 void playerMake()
