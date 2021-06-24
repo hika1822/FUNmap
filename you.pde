@@ -12,6 +12,7 @@ void playerMake()
 {
     // Draw arrow in current position and rotation
     pushMatrix();
+    strokeWeight(1);
     translate(px, py);
     rotate(facing * PI/4);
     fill(255, 200, 200);
@@ -39,7 +40,7 @@ public void handleStickEvents(GStick stick, GEvent event)
       facing = pos;
       dirX = stick.getStickX();
       dirY = stick.getStickY();
-      speed = 3.0;
+      speed = 2.5;
     }
   }
 }

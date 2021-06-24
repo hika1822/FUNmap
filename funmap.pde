@@ -1,4 +1,4 @@
-PImage img1;
+PImage img1, img2;
 
 int areaNum = 3;
 
@@ -39,6 +39,7 @@ public void setup()
 {
   size(700, 700);
   img1 = loadImage("5801458i.jpg");//3階中央エリア
+  img2 = loadImage("menuBar.png");//左上のアイコン
 
   //ライブラリ
   float ss = 80;
@@ -57,30 +58,21 @@ public void draw()
   if(areaNum == 3)
   {
       image(img1, dx, (dy - 4469) + height);//表示
-
+      floor3_kcl();//当たり判定
       //マップ画像は動かない
       if(dx != 0)
       {
         dx = 0;
       }
 
-      fill(255);
-      textSize(50);
-      text(dy, 200, 200);
-      text(py, 200, 250);
-
       //プレイやーの位置を計算する
       px = (px + dirX * speed);
 
-      //プレイヤーの移動範囲制限
-      if(px < 100)
-      {
-        px = 100;
-      }
-      if(px > 600)
-      {
-        px = 600;
-      }
+      fill(255);
+      textSize(50);
+      text(dx, 300, 300);
+      text(dy, 300, 350);
+      text(facing, 300, 400);
 
       //マップの位置範囲制限
       if(dy <= 0)
@@ -118,5 +110,7 @@ public void draw()
   dy = (dy - dirY * speed);*/
 
   playerMake();//プレイヤーの表示
+
+  menuBars();
 }
 
