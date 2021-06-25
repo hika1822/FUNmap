@@ -70,8 +70,8 @@ public void draw()
 
       fill(255);
       textSize(50);
-      text(dx, 300, 300);
-      text(dy, 300, 350);
+      text("dx =" + dx, 300, 300);
+      text("dy =" + dy, 300, 350);
       text(facing, 300, 400);
 
       //マップの位置範囲制限

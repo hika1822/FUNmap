@@ -8,6 +8,58 @@ float dx=0;
 float dy=0;
 float speed;
 
+//オブジェクトの右側の当たり判定を定める関数
+void migi_kcl(float wid, float sita, float ue)
+{
+  if(px <= wid && dy > sita && dy < ue)
+  {
+    if((px <= wid && dy > sita))
+    {
+        if((dy - 3) <= sita + 1)
+        {
+            dy = dy - 3;
+        }
+    }
+    if((px <= wid && dy < ue))
+    {
+        if((dy + 3) >= ue - 1)
+        {
+            dy = dy + 3;
+        }
+    }
+    if(px + 3 > wid)
+    {
+      px = px + 3;
+    }
+  }
+}
+
+//オブジェクトの左側の当たり判定を定める関数
+void hidari_kcl(float wid, float sita, float ue)
+{
+  if(px >= wid && dy > sita && dy < ue)
+  {
+    if((px >= wid && dy > sita))
+    {
+        if((dy - 3) <= sita + 1)
+        {
+            dy = dy - 3;
+        }
+    }
+    if((px >= wid && dy < ue))
+    {
+        if((dy + 3) >= ue - 1)
+        {
+            dy = dy + 3;
+        }
+    }
+    if(px - 3 < wid)
+    {
+      px = px - 3;
+    }
+  }
+}
+
 void playerMake()
 {
     // Draw arrow in current position and rotation
