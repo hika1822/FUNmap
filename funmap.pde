@@ -1,6 +1,5 @@
-PImage img1, img2;
-
-int areaNum = 3;
+PImage img1, img2, img3, img4, img5, img6, img7, img8,
+        img9;
 
 /*************************************************
   ～1階～
@@ -11,7 +10,9 @@ int areaNum = 3;
   売店:
 
   ～3階～
-  3階中央スペース:ID=3, 寸法23x205(入口6x6)(エレベーター6x5)(階段13x6)(テーブル4x10)(いか6x6)(わっか15x4)
+  3階中央スペース:ID=32, 寸法23x205(入口6x6)(エレベーター6x5)(階段13x6)(テーブル4x10)(いか6x6)(わっか15x4)
+  3階左スペース:ID=31
+  3階右スペース:ID=33
   コンピュータ教室１:
   コンピュータ教室２:
   コンピュータ教室３:
@@ -38,8 +39,14 @@ int areaNum = 3;
 public void setup()
 {
   size(700, 700);
-  img1 = loadImage("5801458i.jpg");//3階中央エリア
   img2 = loadImage("menuBar.png");//左上のアイコン
+  img3 = loadImage("floor3.1.jpg");//3階中央エリア
+  img4 = loadImage("floor3.2.jpg");//3階中央エリア
+  img5 = loadImage("floor3.3.jpg");//3階中央エリア
+  img6 = loadImage("floor3.4.jpg");//3階中央エリア
+  img7 = loadImage("floor3.5.jpg");//3階中央エリア
+  img8 = loadImage("floor3.6.jpg");//3階中央エリア
+  img9 = loadImage("3階左.png");
 
   //ライブラリ
   float ss = 80;
@@ -54,55 +61,28 @@ public void setup()
 
 public void draw()
 {
+  
   //3階中央エリアに入ったら
-  if(areaNum == 3)
+  if(areaNum == 32)
   {
-      image(img1, dx, (dy - 4469) + height);//表示
-      floor3_kcl();//当たり判定
-      //マップ画像は動かない
-      if(dx != 0)
-      {
-        dx = 0;
-      }
+      //マップ画像の表示
+      image(img3, dx, (dy - 4469) + height);
+      image(img4, dx, (dy - 3769) + height);
+      image(img5, dx, (dy - 3069) + height);
+      image(img6, dx, (dy - 2369) + height);
+      image(img7, dx, (dy - 1669) + height);
+      image(img8, dx, (dy - 969) + height);
 
-      //プレイやーの位置を計算する
-      px = (px + dirX * speed);
+      floor3M_kcl();//当たり判定
+  }
+  //3階左エリアに入ったら
+  if(areaNum == 31)
+  {
+      background(0);
+      //マップ画像の表示
+      image(img9, dx, (dy - 3758) + height);
 
-      fill(255);
-      textSize(50);
-      text("dx =" + dx, 300, 300);
-      text("dy =" + dy, 300, 350);
-      text(facing, 300, 400);
-
-      //マップの位置範囲制限
-      if(dy <= 0)
-      {
-        dy = 0;
-        //プレイやーを移動可能に
-        py = (py + dirY * speed);
-      }
-      if((py <= 360 && dy < 4469 - height) || (py > 360 && dy > 0))
-      {
-        py = 360;
-        //マップを移動可能に
-        dy = (dy - dirY * speed);
-      }
-      if(dy >= 4469 - height)
-      {
-        dy = 4469 - height;
-        //プレイやーを移動可能に
-        py = (py + dirY * speed);
-      }
-
-      //プレイヤーの移動範囲制限
-      if(py >= height)
-      {
-        py = height;
-      }
-      if(py <= 0)
-      {
-        py = 0;
-      }
+      floor3L_kcl();//当たり判定
   }
 
   /*//マップの位置を計算する
@@ -111,6 +91,16 @@ public void draw()
 
   playerMake();//プレイヤーの表示
 
-  menuBars();
+  menuBars();//メニューアイコンの表示
+
+  sceneCtl();//シーン移動制御
+
+        fill(255);
+      textSize(50);
+      text("dx =" + dx, 300, 300);
+      text("dy =" + dy, 300, 350);
+      text("px =" + px, 300, 400);
+      text("py =" + py, 300, 450);
+      text(facing, 300, 400);
 }
 
