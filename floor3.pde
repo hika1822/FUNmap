@@ -84,16 +84,22 @@ void floor3L_kcl()
     pyobj_kcl(610, 700, height - (3758 - 3630), 1880);
 
     //階段の当たり判定
-    pypyobj_kcl(-700, width - (1755 - 1540), height - (3758 - 3650), height - (3758 - 3640));
+    pypyobj_kcl(-700, width - (1755 - 1540), height, 580);
 
     //円卓の当たり判定
     pydxobj_kcl(-895, width - (1755 - 1540), height - (3758 - 3590), hei - 3340);
 
     //情報ライブラリーの当たり判定
-    pypyobj_kcl(-(1755 - 1055), width - (1755 - 1755), height - (3758 - 3758), height - (3758 - 3710));
+    pxpxobj_kcl(width - (1755 - 1540), width - (1755 - 1755), height - (3758 - 3758), height - (3758 - 3710));
 
     //透明な薄いの当たり判定
     dydyobj_kcl(-750, width - (1755 - 1575), hei - 3250, hei - 3235);
+
+    //研究室(下1)の当たり判定
+    dydyobj_kcl(-700 - (1340 - 1055), width - (1755 - 1520), hei - 3151, hei - 1800);
+
+    //研究室(下2)の当たり判定
+    dydyobj_kcl(-700 - (1055 - 1055), width - (1755 - 1520), hei - 1790, hei - 1542);
 
     //机１の当たり判定
     dxdxobj_kcl(-750, -850, hei - 3120, hei - 3015);
@@ -120,5 +126,5 @@ void floor3L_kcl()
     dxdxobj_kcl(-750, -850, hei - 1910, hei - 1800);
 
     
-
 }
+

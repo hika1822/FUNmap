@@ -69,7 +69,8 @@ void displayLimX(int limX)
       }
 }
 
-//オブジェクトの当たり判定を定める関数
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:unable, dy:enable, dx:unable*/
 void obj_kcl(float left, float right, float sita, float ue)
 {
   if(px >= left && px <= right && dy > sita && dy < ue)
@@ -107,7 +108,8 @@ void obj_kcl(float left, float right, float sita, float ue)
   }
 }
 
-//マップの座標が固定されてるかつオブジェクトの高さがマップ座標変動可能時用オブジェクトの当たり判定を定める関数
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:enable, dy:enable, dx:unable*/
 void pyobj_kcl(float left, float right, float sita, float ue)
 {
   if(px >= left && px <= right && dy >= 0 && dy < ue && py <= sita)
@@ -134,25 +136,26 @@ void pyobj_kcl(float left, float right, float sita, float ue)
     //右面の当たり判定
     if(px - 3 > right)
     {
-      px = px + 5;
+      px = px + 10;
     }
 
     //左面の当たり判定
     if(px + 3 > left)
     {
-      px = px - 5;
+      px = px - 10;
     }
   }
 }
 
-//マップの座標が固定されてる時用オブジェクトの当たり判定を定める関数
-void pypyobj_kcl(float left, float right, float sita, float ue)
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:enable, dy:unable, dx:unable*/
+void pxpxobj_kcl(float left, float right, float sita, float ue)
 {
-  if(dx <= left && px <= right && dy >= 0 && py > ue && py <= sita)
+  if(px >= left && px <= right && dy >= 0 && py > ue && py <= sita)
   {
 
     //下面の当たり判定
-    if((dx <= left && px < right && py < sita))
+    if((px >= left && px <= right && py < sita))
     {
         if((py + 3) >= sita - 1)
         {
@@ -161,29 +164,71 @@ void pypyobj_kcl(float left, float right, float sita, float ue)
     }
 
     //上面の当たり判定
-    if((dx + 3 <= left && px < right && py > ue))
+    if((px >= left && px <= right && py > ue))
     {
         if((py + 3) >= ue - 1)
         {
-            py = py - 5;
+            py = py - 10;
         }
     }
 
     //右面の当たり判定
-    if(px + 3 > right)
+    if(px - 3 > right)
     {
-      px = px + 5;
+      px = px + 10;
     }
 
     //左面の当たり判定
-    if(dx + 3 > left)
+    if(px + 3 < left)
+    {
+      px = px - 10;
+    }
+  }
+}
+
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:unable, dy:unable, dx:enable*/
+void pypyobj_kcl(float left, float right, float sita, float ue)
+{
+  if(dx <= left && px <= right && dy >= 0 && py > ue && py <= sita)
+  {
+
+    //下面の当たり判定
+    if((dx <= left && px < right && py < sita))
+    {
+        if((py + 3) <= sita - 1)
+        {
+            px = px - dirX * speed;
+            py = py - dirY * speed;
+        }
+    }
+
+    //上面の当たり判定
+    if((dx <= left && px < right && py > ue))
+    {
+        if((py + 3) <= ue - 1)
+        {
+            px = px - dirX * speed;
+            py = py - dirY * speed;
+        }
+    }
+
+    //右面の当たり判定
+    if(px > right - 3 && px < right + 3)
+    {
+      px = px + 10;
+    }
+
+    //左面の当たり判定
+    if(dx + 5 > left)
     {
       dx = dx + 5;
     }
   }
 }
 
-//上側左側用オブジェクトの当たり判定を定める関数
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:unable, dy:enable, dx:enable*/
 void dydyobj_kcl(float left, float right, float sita, float ue)
 {
   if(dx <= left && px <= right && dy >= 0 && dy < ue && dy >= sita)
@@ -208,9 +253,9 @@ void dydyobj_kcl(float left, float right, float sita, float ue)
     }
 
     //右面の当たり判定
-    if(px + 3 > right)
+    if(px + 3 < right)
     {
-      px = px + 5;
+      px = px + 10;
     }
 
     //左面の当たり判定
@@ -221,7 +266,8 @@ void dydyobj_kcl(float left, float right, float sita, float ue)
   }
 }
 
-//左側上側用オブジェクトの当たり判定を定める関数
+/*オブジェクトの当たり判定を定める関数
+  px:unable, py:unable, dy:enable, dx:enable*/
 void dxdxobj_kcl(float left, float right, float sita, float ue)
 {
   if(dx <= left && dx >= right && dy >= 0 && dy < ue && dy >= sita)
@@ -259,7 +305,8 @@ void dxdxobj_kcl(float left, float right, float sita, float ue)
   }
 }
 
-//左側右側下側上側用オブジェクトの当たり判定を定める関数
+/*オブジェクトの当たり判定を定める関数
+  px:enable, py:enable, dy:enable, dx:enable*/
 void pydxobj_kcl(float left, float right, float sita, float ue)
 {
   if(dx <= left && px <= right && dy >= 0 && dy < ue && py <= sita)
@@ -329,7 +376,17 @@ public void handleStickEvents(GStick stick, GEvent event)
       facing = pos;
       dirX = stick.getStickX();
       dirY = stick.getStickY();
-      speed = 2.5;
+      if(keyPressed)
+      {
+        if(key == 'a')
+        {
+          speed = 3.0;
+        }
+      }
+      else
+      {
+        speed = 1.5;
+      }
     }
   }
 }

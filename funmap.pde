@@ -1,5 +1,5 @@
 PImage img1, img2, img3, img4, img5, img6, img7, img8,
-        img9;
+        img9, img10;
 
 /*************************************************
   ～1階～
@@ -47,6 +47,7 @@ public void setup()
   img7 = loadImage("floor3.5.jpg");//3階中央エリア
   img8 = loadImage("floor3.6.jpg");//3階中央エリア
   img9 = loadImage("3階左.png");
+  img10 = loadImage("4階右.png");
 
   //ライブラリ
   float ss = 80;
@@ -75,6 +76,7 @@ public void draw()
 
       floor3M_kcl();//当たり判定
   }
+
   //3階左エリアに入ったら
   if(areaNum == 31)
   {
@@ -84,6 +86,17 @@ public void draw()
 
       floor3L_kcl();//当たり判定
   }
+
+  //3階右エリアに入ったら
+  if(areaNum == 43)
+  {
+      background(0);
+      //マップ画像の表示
+      image(img10, dx, (dy - 2658) + height);
+
+      floor4R_kcl();//当たり判定
+  }
+
 
   /*//マップの位置を計算する
   dx = (dx - dirX * speed);
