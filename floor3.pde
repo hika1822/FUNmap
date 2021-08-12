@@ -78,13 +78,14 @@ void floor3L_kcl()
     displayLimX(1755);
     displayLimY(3758);
 
-    text(height - (3758 - 3630), 100, 100);
-
     //右端の壁の当たり判定
     pyobj_kcl(610, 700, height - (3758 - 3630), 1880);
 
+    //奥の方の右端の壁の当たり判定
+    pydobj_kcl(610, 700, 1880, 0);
+
     //階段の当たり判定
-    pypyobj_kcl(-700, width - (1755 - 1540), height, 580);
+    //pypyobj_kcl(-700, width - (1755 - 1540), height, 580);
 
     //円卓の当たり判定
     pydxobj_kcl(-895, width - (1755 - 1540), height - (3758 - 3590), hei - 3340);
@@ -108,7 +109,7 @@ void floor3L_kcl()
     dydyobj_kcl(-700 - (1055 - 1055), width - (1755 - 1521), hei - 1035, hei - 940);
 
     //上の横階段の当たり判定
-    dydyobj_kcl(-700 - (1055 - 1055), 368, hei - 1542, hei - 1406);
+    //dydyobj_kcl(-700 - (1055 - 1055), 368, hei - 1542, hei - 1406);
 
     //上の研究室の当たり判定
     pydxxobj_kcl(-700 - (1055 - 1055), width - (1755 - 1520), hei - 940, 0);
@@ -142,9 +143,6 @@ void floor3L_kcl()
 
     //左上壁の当たり判定
     dxpxdobj_kcl(0, -700, 160, 0);
-
-    //上の方の研究室の当たり判定
-    //dxpxdobj_kcl(-700, -700 - (1340 - 1500), 160, 0);
 
     
 }

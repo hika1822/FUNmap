@@ -231,7 +231,7 @@ void pxpxobj_kcl(float left, float right, float sita, float ue)
 }
 
 /*オブジェクトの当たり判定を定める関数
-  px:enable, py:unable, dy:unable, dx:enable*/
+  px:enable, py:enable, dy:unable, dx:enable*/
 void pypyobj_kcl(float left, float right, float sita, float ue)
 {
   if(dx <= left && px <= right && dy >= 0 && py > ue && py <= sita)
@@ -350,7 +350,7 @@ void dxdxobj_kcl(float left, float right, float sita, float ue)
 }
 
 /*オブジェクトの当たり判定を定める関数
-  px:enable, py:enable, dy:enable, dx:enable*/
+  px:左enable, py:下enable, dy:上enable, dx:右enable*/
 void dxpxobj_kcl(float left, float right, float sita, float ue)
 {
   if(px >= left && dx >= right && dy >= 0 && dy < ue && py <= sita)
@@ -390,7 +390,7 @@ void dxpxobj_kcl(float left, float right, float sita, float ue)
 }
 
 /*オブジェクトの当たり判定を定める関数
-  px:enable, py:enable, dy:下enable, dx:下enable*/
+  px:左enable, py:上enable, dy:下enable, dx:右enable*/
 void dxpxdobj_kcl(float left, float right, float sita, float ue)
 {
   if(px >= left && dx >= right && dy >= 0 && py > ue && dy >= sita)
@@ -470,7 +470,7 @@ void pydxxobj_kcl(float left, float right, float sita, float ue)
 }
 
 /*オブジェクトの当たり判定を定める関数
-  px:右enable, py:下enable, dy:enable, dx:enable*/
+  px:右enable, py:下enable, dy:上enable, dx:左enable*/
 void pydxobj_kcl(float left, float right, float sita, float ue)
 {
   if(dx <= left && px <= right && dy >= 0 && dy < ue && py <= sita)
@@ -545,6 +545,18 @@ public void handleStickEvents(GStick stick, GEvent event)
         if(key == 'a')
         {
           speed = 2.5;
+        }
+        if(key == 'z')
+        {
+          speed = 3.0;
+        }
+        if(key == 's')
+        {
+          speed = 4.0;
+        }
+        if(key == 'd')
+        {
+          speed = 5.0;
         }
       }
       else

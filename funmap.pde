@@ -1,45 +1,17 @@
 PImage img1, img2, img3, img4, img5, img6, img7, img8,
-        img9, img10;
+        img9, img10, img11, img12, img13, img14, img15, img16, img17;
 
-/*************************************************
-  ～1階～
-  １階左スペース:
-  食堂:
-  ～2階～
-  ２階左スペース:
-  売店:
 
-  ～3階～
-  3階中央スペース:ID=32, 寸法23x205(入口6x6)(エレベーター6x5)(階段13x6)(テーブル4x10)(いか6x6)(わっか15x4)
-  3階左スペース:ID=31
-  3階右スペース:ID=33
-  コンピュータ教室１:
-  コンピュータ教室２:
-  コンピュータ教室３:
-  情報ライブラリ:
-  体育館:
-  ミュージアム:
-  エレクトロニクス工房:
-  
-  大講義室:
+/*****************************************************************
+ 時間がなかったため、１階から4階までのエリアの移動手段は全て追加しまし
+ たが、５階エリアへの移動手段を追加できませんでした。
+ また、一部オブジェクトの当たり判定を追加できませんでした。
+*****************************************************************/
 
-  ～4階～
-  4階左エリア:
-  4階右エリア:
-  C&D教室:
-  事務局:
-
-  ～5階～
-  講堂:
-  小講義室:
-  中講義室:
-
- *************************************************/
 
 public void setup()
 {
   size(700, 700);
-  img2 = loadImage("menuBar.png");//左上のアイコン
   img3 = loadImage("floor3.1.jpg");//3階中央エリア
   img4 = loadImage("floor3.2.jpg");//3階中央エリア
   img5 = loadImage("floor3.3.jpg");//3階中央エリア
@@ -48,6 +20,13 @@ public void setup()
   img8 = loadImage("floor3.6.jpg");//3階中央エリア
   img9 = loadImage("3階左.png");
   img10 = loadImage("4階右.png");
+  img11 = loadImage("４階中央.png");
+  img12 = loadImage("１階左.png");
+  img13 = loadImage("２階左.png");
+  img14 = loadImage("５階中央.png");
+  img15 = loadImage("５階右.png");
+  img16 = loadImage("５階左.png");
+  img17 = loadImage("４階左.png");
 
   //ライブラリ
   float ss = 80;
@@ -63,6 +42,26 @@ public void setup()
 public void draw()
 {
   
+  //１階左エリアに入ったら
+  if(areaNum == 11)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img12, dx, (dy - 3758) + height);
+
+      floor1L_kcl();//当たり判定
+  }
+  
+  //２階左エリアに入ったら
+  if(areaNum == 21)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img13, dx, (dy - 3758) + height);
+
+      floor2L_kcl();//当たり判定
+  }
+
   //3階中央エリアに入ったら
   if(areaNum == 32)
   {
@@ -80,40 +79,75 @@ public void draw()
   //3階左エリアに入ったら
   if(areaNum == 31)
   {
-      background(0);
+      background(200, 200, 200);
       //マップ画像の表示
       image(img9, dx, (dy - 3758) + height);
 
       floor3L_kcl();//当たり判定
   }
 
-  //3階右エリアに入ったら
+  //4階右エリアに入ったら
   if(areaNum == 43)
   {
-      background(0);
+      background(200, 200, 200);
       //マップ画像の表示
       image(img10, dx, (dy - 2658) + height);
 
       floor4R_kcl();//当たり判定
   }
 
+  //4階中央エリアに入ったら
+  if(areaNum == 42)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img11, dx, (dy - 4469) + height);
 
-  /*//マップの位置を計算する
-  dx = (dx - dirX * speed);
-  dy = (dy - dirY * speed);*/
+      floor4M_kcl();//当たり判定
+  }
+
+  //4階左エリアに入ったら
+  if(areaNum == 41)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img17, dx, (dy - 3644) + height);
+
+      floor4L_kcl();//当たり判定
+  }
+
+  //5階右エリアに入ったら
+  if(areaNum == 53)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img15, dx, (dy - 2658) + height);
+
+      floor5R_kcl();//当たり判定
+  }
+
+  //5階中央エリアに入ったら
+  if(areaNum == 52)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img14, dx, (dy - 4469) + height);
+
+      floor5M_kcl();//当たり判定
+  }
+
+  //5階左エリアに入ったら
+  if(areaNum == 51)
+  {
+      background(200, 200, 200);
+      //マップ画像の表示
+      image(img16, dx, (dy - 3644) + height);
+
+      floor5L_kcl();//当たり判定
+  }
 
   playerMake();//プレイヤーの表示
 
-  menuBars();//メニューアイコンの表示
-
   sceneCtl();//シーン移動制御
-
-        fill(255);
-      textSize(50);
-      text("dx =" + dx, 300, 300);
-      text("dy =" + dy, 300, 350);
-      text("px =" + px, 300, 400);
-      text("py =" + py, 300, 450);
-      text(facing, 300, 400);
 }
 
